@@ -59,7 +59,7 @@ Using the service in PHP code
 .. code-block:: php
 
     <?php
-        $this->get('rolland_imagick.imagick')->processFilter('my_filter');
+        $this->get('rolland_imagick.imagick')->processFilter('test.jpg', 'my_filter');
 
 Using more Imagick methods
 --------------------------
