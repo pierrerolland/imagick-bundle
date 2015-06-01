@@ -74,7 +74,7 @@ You can use the Imagick object, though.
 
         $imagick
             ->open('test.jpg')
-            ->getObject();
+            ->getObject()
             ->resetImagePage(1)
         ;
 
