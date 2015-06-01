@@ -6,7 +6,6 @@
     "imagick"
   ],
   "type" : "symfony-bundle",
-  "license" : "MIT",
   "authors" : [
     {
       "name" : "Pierre ROLLAND",
@@ -16,7 +15,8 @@
   "require" : {
     "symfony/symfony" : ">= 2.2.0",
     "twig/twig" : ">= 1.9.0",
-    "twig/extensions" : "~1.0"
+    "twig/extensions" : "~1.0",
+    "ext-imagick": "*"
   },
   "target-dir" : "Rolland/ImagickBundle",
   "autoload" : {
