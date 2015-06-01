@@ -1,7 +1,18 @@
 parameters:
     rolland_imagick.imagick.class: Rolland\ImagickBundle\Service\Imagick
     rolland_imagick.allowed_operations:
+        - crop
+        - flip
+        - flop
+        - gblur
+        - grayscale
+        - negate
         - opacity
+        - rcorners
+        - rotate
+        - sepia
+        - strip
+        - thumb
 
 services:
     rolland_imagick.imagick:

@@ -2,13 +2,14 @@
 
 This bundle provides some functions to manipulate images, via the generic Imagick extension.
 
-Still in development. Currently, only one operation is available : changing opacity
+Still in development.
 
 ## Features
 
 - Create filters that you will call in your Twig files. These filters can combine several operations on your images
 - Use some Imagick functions as a Symfony 2 service
 - Modified images are stored in a customized cache directory
+- Possibility to use all Imagick methods
 
 ## Available operations
 

@@ -114,6 +114,101 @@ class Imagick
     }
 
     /**
+     * Gets the \Imagick object
+     *
+     * @return \Imagick
+     */
+    public function getObject()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Crops the image from the point at ($x, $y) and for a width and height of ($width, $height)
+     *
+     * @param int $x
+     * @param int $y
+     * @param int $width
+     * @param int $height
+     *
+     * @return Imagick
+     */
+    public function crop($x, $y, $width, $height)
+    {
+        $this->image->cropImage($width, $height, $x, $y);
+        $this->operations[] = 'crop' . $x . $y . $width . $height;
+
+        return $this;
+    }
+
+    /**
+     * Applies a vertical mirror on the image
+     *
+     * @return Imagick
+     */
+    public function flip()
+    {
+        $this->image->flipImage();
+        $this->operations[] = 'flip';
+
+        return $this;
+    }
+
+    /**
+     * Applies a horizontal mirror on the image
+     *
+     * @return Imagick
+     */
+    public function flop()
+    {
+        $this->image->flopImage();
+        $this->operations[] = 'flip';
+
+        return $this;
+    }
+
+    /**
+     * Adds a gaussian blur on the image
+     *
+     * @param float $radius
+     * @param float $sigma
+     *
+     * @return Imagick
+     */
+    public function gblur($radius, $sigma)
+    {
+        $this->image->gaussianBlurImage($radius, $sigma);
+        $this->operations[] = 'gblur' . $radius . $sigma;
+
+        return $this;
+    }
+
+    /**
+     * Returns the image grayscaled
+     *
+     * @return Imagick
+     */
+    public function grayscale()
+    {
+        $this->image->transformimagecolorspace(\Imagick::COLORSPACE_GRAY);
+        $this->operations[] = 'grayscale';
+
+        return $this;
+    }
+
+    /**
+     * Negates the image's colors
+     *
+     * @return Imagick
+     */
+    public function negate()
+    {
+        $this->image->negateImage(false);
+
+        return $this;
+    }
+
+    /**
      * Changes the image's opacity
      *
      * @param int $opacity
@@ -124,6 +219,78 @@ class Imagick
     {
         $this->image->setImageOpacity($opacity);
         $this->operations[] = 'opacity' . $opacity;
+
+        return $this;
+    }
+
+    /**
+     * Rounds the image's corners
+     *
+     * @param float $x
+     * @param float $y
+     *
+     * @return Imagick
+     */
+    public function rcorners($x, $y)
+    {
+        $this->image->roundCorners($x, $y);
+        $this->operations[] = 'rcorners' . $x . $y;
+
+        return $this;
+    }
+
+    /**
+     * Rotates the image's
+     *
+     * @param int $angle
+     *
+     * @return Imagick
+     */
+    public function rotate($angle)
+    {
+        $this->image->rotateImage(new \ImagickPixel('#00000000'), $angle);
+        $this->operations[] = 'rotate' . $angle;
+
+        return $this;
+    }
+
+    /**
+     * Sepias the image
+     *
+     * @return Imagick
+     */
+    public function sepia()
+    {
+        $this->image->sepiaToneImage(80);
+
+        return $this;
+    }
+
+    /**
+     * Strips EXIF data from image
+     *
+     * @return Imagick
+     */
+    public function strip()
+    {
+        $this->image->stripImage();
+        $this->operations[] = 'strip';
+
+        return $this;
+    }
+
+    /**
+     * Thumbnails the image A 0 will keep proportions
+     *
+     * @param int $x
+     * @param int $y
+     *
+     * @return Imagick
+     */
+    public function thumb($x, $y)
+    {
+        $this->image->thumbnailImage($x, $y);
+        $this->operations[] = 'thumb' . $x . $y;
 
         return $this;
     }
