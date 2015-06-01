@@ -13,7 +13,17 @@ Still in development.
 
 ## Available operations
 
+- Cropping
+- Flipping, and flopping
+- Adding a gaussian blur
+- Turning image to grayscale
+- Negating image's colors
 - Changing opacity
+- Rounding image's corners
+- Rotating
+- Turning image to sepia
+- Stripping EXIF data
+- Making thumbnails
 
 ## Installation
 
