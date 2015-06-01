@@ -8,6 +8,9 @@ Add these lines to your ``composer.json``
 
 .. code-block:: json
 
+    "require": [
+        "pierrerolland/imagick-bundle": "dev-master"
+    ],
     "repositories": [
         {
             "type": "vcs",
@@ -19,7 +22,7 @@ And then run
 
 .. code-block:: bash
 
-    $ composer install
+    $ composer update pierrerolland/imagick-bundle
 
 This command requires you to have Composer installed globally, as explained
 in the `installation chapter`_ of the Composer documentation.
