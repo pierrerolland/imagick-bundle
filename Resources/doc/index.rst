@@ -42,4 +42,16 @@ file of your project:
         // ...
     }
 
+Step 3: Configure the Bundle
+----------------------------
+
+Some fields are mandatory, please add them in the ``app/config/config.yml``
+file of your project
+
+.. code-block:: yaml
+
+    rolland_imagick:
+        cache_dir: %kernel.root_dir%/../web/cache/rolland #required
+        web_dir:   %kernel.root_dir%/../web # optional if equal to this default value
+
 .. _`installation chapter`: https://getcomposer.org/doc/00-intro.md
