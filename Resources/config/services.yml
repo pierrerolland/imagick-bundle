@@ -1,0 +1,14 @@
+parameters:
+    rolland_imagick.imagick.class: Rolland\ImagickBundle\Service\Imagick
+    rolland_imagick.allowed_operations:
+        - opacity
+
+services:
+    rolland_imagick.imagick:
+        class: %rolland_imagick.imagick.class%
+        arguments:
+            - %rolland_imagick.filters%
+            - %rolland_imagick.cache_dir%
+            - %rolland_imagick.web_dir%
+            - %rolland_imagick.allowed_operations%
+            - @service_container

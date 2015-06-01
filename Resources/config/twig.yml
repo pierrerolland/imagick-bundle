@@ -1,0 +1,9 @@
+parameters:
+    rolland_imagick.twig.imagick.class: Rolland\ImagickBundle\Twig\ImagickExtension
+
+services:
+    rolland_imagick.twig.imagick:
+        class: %rolland_imagick.twig.imagick.class%
+        arguments: [@rolland_imagick.imagick]
+        tags:
+            - { name: twig.extension }
