@@ -4,12 +4,22 @@ Installation
 Step 1: Download the Bundle
 ---------------------------
 
-Open a command console, enter your project directory and execute the
-following command to download the latest stable version of this bundle:
+Add these lines to your ``composer.json``
+
+.. code-block:: json
+
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/pierrerolland/imagick-bundle"
+        }
+    ],
+
+And then run
 
 .. code-block:: bash
 
-    $ composer require rolland/imagick-bundle "~1"
+    $ composer install
 
 This command requires you to have Composer installed globally, as explained
 in the `installation chapter`_ of the Composer documentation.

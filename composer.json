@@ -1,0 +1,27 @@
+{
+  "name" : "pierrerolland/imagick-bundle",
+  "minimum-stability" : "dev",
+  "description" : "Imagick services for Symfony2",
+  "keywords" : [
+    "imagick"
+  ],
+  "type" : "symfony-bundle",
+  "license" : "MIT",
+  "authors" : [
+    {
+      "name" : "Pierre ROLLAND",
+      "email" : "roll.pierre@gmail.com"
+    }
+  ],
+  "require" : {
+    "symfony/symfony" : ">= 2.2.0",
+    "twig/twig" : ">= 1.9.0",
+    "twig/extensions" : "~1.0"
+  },
+  "target-dir" : "Rolland/ImagickBundle",
+  "autoload" : {
+    "psr-0" : {
+      "Rolland\\ImagickBundle" : ""
+    }
+  }
+}
