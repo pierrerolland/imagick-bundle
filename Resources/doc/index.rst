@@ -8,9 +8,9 @@ Add these lines to your ``composer.json``
 
 .. code-block:: json
 
-    "require": [
+    "require": {
         "pierrerolland/imagick-bundle": "dev-master"
-    ],
+    },
     "repositories": [
         {
             "type": "vcs",
