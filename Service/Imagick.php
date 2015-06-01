@@ -139,6 +139,10 @@ class Imagick
      */
     public function processFilter($fileName, $filterName)
     {
+        $cache = $this->retrieveCache($fileName, $filterName);
+        if ($cache) {
+            return $cache;
+        }
         if (!array_key_exists($filterName, $this->filters)) {
             throw new FilterNotFoundException($filterName, array_keys($this->filters));
         }
@@ -154,5 +158,22 @@ class Imagick
             call_user_func_array(array($this, $operation), $args);
         }
         return $this->save($filterName);
+    }
+
+    /**
+     * @param string $fileName
+     * @param string $filterName
+     *
+     * @return bool|string
+     */
+    protected function retrieveCache($fileName, $filterName)
+    {
+        $hash = hash_file('md5', $this->webDir . $fileName);
+        $cacheName = $this->cacheDir . '/' . $hash . $filterName;
+        if (file_exists($cacheName)) {
+            return $this->assetsHelper->getUrl($this->baseAssetUrl . '/' . $hash . $filterName, 'url');
+        }
+
+        return false;
     }
 }
