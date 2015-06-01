@@ -6,6 +6,7 @@
     "imagick"
   ],
   "type" : "symfony-bundle",
+  "license": "MIT",
   "authors" : [
     {
       "name" : "Pierre ROLLAND",
