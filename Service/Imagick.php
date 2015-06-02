@@ -62,6 +62,11 @@ class Imagick
     protected $assetsHelper;
 
     /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    /**
      * @param array              $filters
      * @param string             $cacheDir
      * @param string             $webDir
@@ -75,8 +80,7 @@ class Imagick
         $this->webDir = realpath($webDir);
         $this->baseAssetUrl = str_replace($this->webDir, '', $this->cacheDir);
         $this->allowedOperations = $allowedOperations;
-        $this->assetsHelper = $container->get('templating.helper.assets');
-        $this->assetsHelper->addPackage('url', new UrlPackage());
+        $this->container = $container;
     }
 
     /**
@@ -110,7 +114,7 @@ class Imagick
         $savedName = $this->cacheDir . '/' . $this->hashed . $name;
         $this->image->writeImage($savedName);
 
-        return $this->assetsHelper->getUrl($this->baseAssetUrl . '/' . $this->hashed . $name, 'url');
+        return $this->getAssetsHelper()->getUrl($this->baseAssetUrl . '/' . $this->hashed . $name, 'url');
     }
 
     /**
@@ -338,9 +342,22 @@ class Imagick
         $hash = hash_file('md5', $this->webDir . $fileName);
         $cacheName = $this->cacheDir . '/' . $hash . $filterName;
         if (file_exists($cacheName)) {
-            return $this->assetsHelper->getUrl($this->baseAssetUrl . '/' . $hash . $filterName, 'url');
+            return $this->getAssetsHelper()->getUrl($this->baseAssetUrl . '/' . $hash . $filterName, 'url');
         }
 
         return false;
+    }
+
+    /**
+     * @return CoreAssetsHelper
+     */
+    protected function getAssetsHelper()
+    {
+        if (!$this->assetsHelper) {
+            $this->assetsHelper = $this->container->get('templating.helper.assets');
+            $this->assetsHelper->addPackage('url', new UrlPackage());
+        }
+
+        return $this->assetsHelper;
     }
 }
