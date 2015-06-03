@@ -1,8 +1,10 @@
 <?php
 namespace Rolland\ImagickBundle\Service;
 
+use Rolland\ImagickBundle\Exception\FileNotFoundException;
 use Rolland\ImagickBundle\Exception\FilterNotFoundException;
 use Rolland\ImagickBundle\Exception\OperationNotPermittedException;
+use Rolland\ImagickBundle\Exception\WriteFileException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Templating\Asset\UrlPackage;
 use Symfony\Component\Templating\Helper\CoreAssetsHelper;
@@ -89,10 +91,18 @@ class Imagick
      * @param string $fileName
      *
      * @return Imagick
+     *
+     * @throws FileNotFoundException
+     *
+     * @todo fallback image
      */
     public function open($fileName)
     {
-        $this->image = new \Imagick($this->webDir . $fileName);
+        try {
+            $this->image = new \Imagick($this->webDir . $fileName);
+        } catch (\ImagickException $e) {
+            throw new FileNotFoundException($this->webDir . $fileName);
+        }
         $this->hashed = hash_file('md5', $this->webDir . $fileName);
         $this->operations = array();
 
@@ -105,6 +115,10 @@ class Imagick
      * @param string $name
      *
      * @return string
+     *
+     * @throws WriteFileException
+     *
+     * @todo fallback image
      */
     public function save($name = '')
     {
@@ -112,7 +126,11 @@ class Imagick
             $name = hash('md5', implode('', $this->operations));
         }
         $savedName = $this->cacheDir . '/' . $this->hashed . $name;
-        $this->image->writeImage($savedName);
+        try {
+            $this->image->writeImage($savedName);
+        } catch (\ImagickException $e) {
+            throw new WriteFileException($savedName);
+        }
 
         return $this->getAssetsHelper()->getUrl($this->baseAssetUrl . '/' . $this->hashed . $name, 'url');
     }
